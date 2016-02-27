@@ -1,0 +1,22 @@
+<html>
+	<head>
+	</head>
+	<body>
+		{% if curr_comic %}
+			<h1>{{ curr_comic.comic_title }}</h1>
+			<img src="{{ curr_comic.comicfile.url }}">
+			<div id="comic_nav">
+			{% if prev_comic %}
+				<a href="{% url 'displaycomics:comicview' prev_comic.id %}">Previous</a>
+			{% endif %}
+			{% if rand_comic %}
+				<a href="{% url 'displaycomics:comicview' rand_comic.id %}">Random</a>
+			{% endif %}
+			{% if next_comic %}
+				<a href="{% url 'displaycomics:comicview' next_comic.id %}">Next</a>
+			{% endif %}
+			</div>
+
+		{% endif %}
+	</body>
+</html>
