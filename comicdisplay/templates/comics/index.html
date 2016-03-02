@@ -1,26 +1,55 @@
 {% load staticfiles %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'comicdisplay/style.css' %}" />
 
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
 	<head>
+		<link rel="stylesheet" type="text/css" href="{% static 'comicdisplay/style.css' %}" />
+		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<title>Life Like Comics</title>
 	</head>
 	<body>
+		<div class="container-fluid">
+			<h1 class="text-center">Life Like Comics</h1>
 		{% if curr_comic %}
-			<h1>{{ curr_comic.comic_title }}</h1>
-			<img src="{{ curr_comic.comicfile.url }}">
-			<div id="comic_nav">
-			{% if prev_comic %}
-				<a href="{% url 'displaycomics:comicview' prev_comic.id %}">Previous</a>
-			{% endif %}
-			{% if rand_comic %}
-				<a href="{% url 'displaycomics:comicview' rand_comic.id %}">Random</a>
-			{% endif %}
-			{% if next_comic %}
-				<a href="{% url 'displaycomics:comicview' next_comic.id %}">Next</a>
-			{% endif %}
+			<div class="container-fluid">
+				<h3>{{ curr_comic.comic_title }}</h3>
 			</div>
+			<div class="container-fluid">
+				<img src="{{ curr_comic.comicfile.url }}">
+			</div>
+			
+			<div id="comic_nav" class="container-fluid">
+				<div class="col-xs-3"></div>
+				<div class="col-xs-2">
+				{% if prev_comic %}
+					<a href="{% url 'displaycomics:comicview' prev_comic.id %}">Previous</a>
+				{% else %}
+					<span class="disabled_link">Previous</span>
+				{% endif %}
+				</div>
+				<div class="col-xs-2">
+				{% if rand_comic %}
+					<a href="{% url 'displaycomics:comicview' rand_comic.id %}">Random</a>
+				{% endif %}
+				</div>
+				<div class="col-xs-2">
+				{% if next_comic %}
+					<a href="{% url 'displaycomics:comicview' next_comic.id %}">Next</a>
+				{% else %}
+					<span class="disabled_link">Next</span>
+				{% endif %}
+				</div>
+				<div class="col-xs-3"></div>
+			</div>
+			
 
 		{% endif %}
+		</div>
 	</body>
 </html>
